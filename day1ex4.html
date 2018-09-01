@@ -7,37 +7,42 @@
 <body>
   <div id='app'></div>
 
-  <script>
-  const image = 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'
-  const name = 'Tyler McGinnis'
-  const username = 'tylermcginnis'
+<script>
+// const image = document.createElement("img")
+// image.src = 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'
+const name = 'Tyler McGinnis'
+const username = 'tylermcginnis'
 
-  function AvatarComponent(props) {
-    return <img src={props.image} />
-  }
+const avatarElement = React.createElement(
+  'div',
+  null,
+  image
+)
 
-  function LabelComponent(props) {
-    return <h1>Name: {props.name}</h1>
-  }
+const labelElement = React.createElement(
+  'h1',
+  null,
+  name
+)
 
-  function ScreennameComponent(props) {
-    return <h3>Username: {props.username}</h3>
-  }
+const screennameElement = React.createElement(
+  'h3',
+  null,
+  username
+)
 
-  function Badge() {
-    return (
-      <div>
-        <AvatarComponent image={image} />
-        <LabelComponent name={name} />
-        <ScreennameComponent username={username} />
-      </div>
-    )
-  }
+const badgeElement = React.createElement(
+  'div',
+  null,
+  avatarElement,
+  labelElement,
+  screennameElement
+)
 
-  ReactDOM.render(
-    <Badge />,
-    document.getElementById('app')
-  )
+ReactDOM.render(
+  badgeElement,
+  document.getElementById('app')
+)
 
   </script>
 </body>
