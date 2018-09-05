@@ -8,40 +8,84 @@
   <div id='app'></div>
 
 <script>
-const image = <img src='https://avatars0.githubusercontent.com/u/2933430?v=3&s=460' />
-const name = 'Tyler McGinnis'
-const username = 'tylermcginnis'
+// const image = <img src='https://avatars0.githubusercontent.com/u/2933430?v=3&s=460' />
+// const name = 'Tyler McGinnis'
+// const username = 'tylermcginnis'
+//
+// const avatarElement = React.createElement(
+//   'div',
+//   null,
+//   image
+// )
+//
+// const labelElement = React.createElement(
+//   'h1',
+//   null,
+//   name
+// )
+//
+// const screennameElement = React.createElement(
+//   'h3',
+//   null,
+//   username
+// )
+//
+// const badgeElement = React.createElement(
+//   'div',
+//   null,
+//   avatarElement,
+//   labelElement,
+//   screennameElement
+// )
+//
+// ReactDOM.render(
+//   badgeElement,
+//   document.getElementById('app')
+// )
 
-const avatarElement = React.createElement(
-  'div',
-  null,
-  image
-)
+// Tyler's solution using Babel:
 
-const labelElement = React.createElement(
-  'h1',
-  null,
-  name
-)
+'use strict';
 
-const screennameElement = React.createElement(
-  'h3',
-  null,
-  username
-)
+function Avatar(props) {
+  return React.createElement('img', { src: props.src });
+}
 
-const badgeElement = React.createElement(
-  'div',
-  null,
-  avatarElement,
-  labelElement,
-  screennameElement
-)
+function Label(props) {
+  return React.createElement(
+    'h1',
+    null,
+    'Name: ',
+    props.name
+  );
+}
 
-ReactDOM.render(
-  badgeElement,
-  document.getElementById('app')
-)
+function ScreenName(props) {
+  return React.createElement(
+    'h3',
+    null,
+    'Username: ',
+    props.username
+  );
+}
+
+function Badge(props) {
+  var user = props.user;
+
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(Avatar, { src: user.img }),
+    React.createElement(Label, { name: user.name }),
+    React.createElement(ScreenName, { username: user.username })
+  );
+}
+
+ReactDOM.render(React.createElement(Badge, { user: {
+    name: 'Tyler McGinnis',
+    img: 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460',
+    username: 'tylermcginnis'
+  } }), document.getElementById('app'));
 
   </script>
 </body>
