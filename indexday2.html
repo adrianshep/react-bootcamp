@@ -33,7 +33,7 @@ you need to use a class component rather than a functional component
 therefore, change App from functional component to a class
 component
 
-using a functional component, return is the UI of the component
+using a (stateless) functional component, return is the UI of the component
 
 using a class component, you can specify what the UI is going to be
 by the render method
@@ -42,9 +42,22 @@ by the render method
 
     class App extends React.Component {
       constructor(props) {
-//  when using constructor always call super
+/*
+whenever you use constructor you always call super which will
+invoke constructor function of the class you are extending
+*/
         super(props)
+/*
+now we can add any state we want to our component
+instead of our state living inside of our render method,
+it is now living on our component instance
 
+difference between props and state:
+- props are the data you pass on to a component
+  (like arguments to a function)
+- state is just local to a component
+
+*/
         this.state = {
           friends: ['Jordyn', 'Mikenzi', 'Jake']
         }
