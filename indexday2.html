@@ -65,6 +65,17 @@ difference between props and state:
           friends: ['Jordyn', 'Mikenzi', 'Jake']
         }
       }
+      handleAddFriend() {
+
+      }
+      handleRemoveFriend(name) {
+        this.setState((currentState) => {
+          return {
+            friends: currentState.friends.filter((friend) => friend !== name)
+          }
+        })
+      }
+
       render() {
 //        const friends = ['Jordyn', 'Mikenzi', 'Jake']
         return (
