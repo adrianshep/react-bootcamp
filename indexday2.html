@@ -10,14 +10,14 @@
   <div id='app'></div>
 
   <script type='text/babel'>
+  /* below, we are passing onClick a function definition, not a
+    function invocation, which would fire immediately */
     function FriendsList(props) {
       return (
         <ul>
           {props.list.map((name) => (
             <li key={name}>
               <span>{name}</span>
-              /* below, we are passing onClick a function definition, not a
-                function invocation, which would fire immediately */
               <button onClick={() => props.onRemoveFriend(name)}>Remove</button>
             </li>
           ))}
@@ -65,12 +65,22 @@ difference between props and state:
 
 */
         this.state = {
-          friends: ['Jordyn', 'Mikenzi', 'Jake']
+          friends: ['Jordyn', 'Mikenzi', 'Jake'],
+          input: ''
         }
-        this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
-      }
-      handleAddFriend() {
 
+        this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
+        this.updateInput = this.updateInput.bind(this)
+        this.handleAddFriend = this.handleAddFriend.bind(this)
+      }
+      // below, we use .concat instead of .push because we don't want to change the existing friends array, but rather create a new one -- we never want to modify the state directly
+      handleAddFriend() {
+        this.setState((currentState) => {
+          return {
+            friends: currentState.friends.concat([this.state.input]),
+            input: ''
+          }
+        })
       }
       handleRemoveFriend(name) {
         this.setState((currentState) => {
@@ -79,11 +89,24 @@ difference between props and state:
           }
         })
       }
+      updateInput(e) {
+        const value = e.target.value
 
+        this.setState({
+          input: value
+        })
+      }
       render() {
 //        const friends = ['Jordyn', 'Mikenzi', 'Jake']
         return (
           <div>
+          <input
+            type='text'
+            placeholder='new friend'
+            value={this.state.input}
+            onChange={this.updateInput}
+            />
+            <button onClick={this.handleAddFriend}>Submit</button>
             <FriendsList
               list={this.state.friends}
               onRemoveFriend={this.handleRemoveFriend}
