@@ -53,9 +53,12 @@
         })
       }
       handleClearFriend() {
-        return {
-          friends = []
-        }
+        this.setState((currentState) => {
+          return {
+            friends: this.setState({ friends: [] })
+            // this.setState({ myArray: [] });
+          }
+        })
       }
       updateInput(e) {
         const value = e.target.value
@@ -75,7 +78,7 @@
             <button onClick={this.handleAddFriend}>
               Submit
             </button>
-            <button>Clear All</button>
+            <button onClick={this.handleClearFriend}>Clear All</button>
             <h2>Active Friends</h2>
             <FriendsList
               list={this.state.friends}
