@@ -55,7 +55,7 @@
       handleClearFriend() {
         this.setState((currentState) => {
           return {
-            friends: this.setState({ friends: [] })
+            friends: currentState.friends.pop()
             // this.setState({ myArray: [] });
           }
         })
