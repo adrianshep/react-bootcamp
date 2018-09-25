@@ -13,12 +13,28 @@
   <div id='app'></div>
 
   <script type='text/babel'>
+    function ActiveFriends(props) {
+      return (
+        <div>
+          Active Friends
+        </div>
+      )
+    }
+
+    function InactiveFriends(props) {
+      return (
+        <div>
+          Inactive Friends
+        </div>
+      )
+    }
+
     function FriendsList (props) {
       return (
         <ul>
-          {props.list.map((name) => (
-            <li key={name}>
-              <span>{name}</span>
+          {props.list.map((friend) => (
+            <li key={friend.name}>
+              <span>{friend.name}</span>
               <button onClick={() => props.onRemoveFriend(name)}>Remove</button>
               <button>Deactivate</button>
             </li>
@@ -29,8 +45,22 @@
     class App extends React.Component {
       constructor(props) {
         super(props)
+        // redo friends as an array of objects rather than an array of strings
         this.state = {
-          friends: ['Jordyn', 'Mikenzi', 'Jake'],
+          friends: [
+            {
+              name: 'Jordyn',
+              active: true,
+            },
+            {
+              name: 'Mikenzi',
+              active: true,
+            }
+            {
+              name: 'Jake',
+              active: false,
+            }
+          ],
           input: '',
         }
         this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
@@ -40,7 +70,11 @@
       handleAddFriend() {
         this.setState((currentState) => {
           return {
-            friends: currentState.friends.concat([currentState.input]),
+            // an array of objects here too
+            friends: currentState.friends.concat([{
+              name: currentState.input,
+              active: true,
+            }]),
             input: ''
           }
         })
@@ -48,18 +82,11 @@
       handleRemoveFriend(name) {
         this.setState((currentState) => {
           return {
-            friends: currentState.friends.filter((friend) => friend !== name)
+            friends: currentState.friends.filter((friend.name) => friend !== name)
           }
         })
       }
-      handleClearFriend() {
-        this.setState((currentState) => {
-          return {
-            friends: currentState.friends = []
-            // this.setState({ myArray: [] });
-          }
-        })
-      }
+
       updateInput(e) {
         const value = e.target.value
         this.setState({
@@ -85,12 +112,18 @@
               Clear All
               </button>
             </div>
-            <h2>Active Friends</h2>
-            <FriendsList
-              list={this.state.friends}
-              onRemoveFriend={this.handleRemoveFriend}
+        //    <h2>Active Friends</h2>
+            // <FriendsList
+            //   list={this.state.friends}
+            //   onRemoveFriend={this.handleRemoveFriend}
+            // />
+        //    <h2>Inactive Friends</h2>
+            <ActiveFriends
+              list={this.state.friends.filter((friend) => friend.active === true)}
             />
-            <h2>Inactive Friends</h2>
+            <InactiveFriends
+              list={this.state.friends.filter((friend) => friend.active === false)}
+            />
           </div>
         )
       }
