@@ -79,7 +79,11 @@
               Submit
             </button>
             <div>
-            <button onClick={this.handleClearFriend}>Clear All</button>
+              <button onClick={() => this.setState({
+                friends: []
+              })}>
+              Clear All
+              </button>
             </div>
             <h2>Active Friends</h2>
             <FriendsList
