@@ -55,7 +55,7 @@
       handleClearFriend() {
         this.setState((currentState) => {
           return {
-            friends: currentState.friends.pop()
+            friends: currentState.friends = []
             // this.setState({ myArray: [] });
           }
         })
@@ -78,7 +78,9 @@
             <button onClick={this.handleAddFriend}>
               Submit
             </button>
+            <div>
             <button onClick={this.handleClearFriend}>Clear All</button>
+            </div>
             <h2>Active Friends</h2>
             <FriendsList
               list={this.state.friends}
