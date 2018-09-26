@@ -15,27 +15,32 @@
   <script type='text/babel'>
     function ActiveFriends(props) {
       return (
-        <ul>
-          {props.list.map((friend) => (
-            <li key={friend.name}>
-              <span>{friend.name}</span>
-              <button>Remove</button>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <h2>Active Friends</h2>
+          <ul>
+            {props.list.map((friend) => (
+              <li key={friend.name}>
+                <span>{friend.name}</span>
+                <button onClick={() => props.onRemoveFriend(friend.name)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
 
     function InactiveFriends(props) {
       return (
-        <ul>
-          {props.list.map((friend) => (
-            <li key={friend.name}>
-              <span>{friend.name}</span>
-              <button>Remove</button>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <h2>Inactive Friends</h2>
+          <ul>
+            {props.list.map((friend) => (
+              <li key={friend.name}>
+                <span>{friend.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
 
@@ -129,6 +134,7 @@
             // />
         //    <h2>Inactive Friends</h2>
             <ActiveFriends
+              onRemoveFriend={this.handleRemoveFriend}
               list={this.state.friends.filter((friend) => friend.active === true)}
             />
             <InactiveFriends
