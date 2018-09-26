@@ -15,17 +15,27 @@
   <script type='text/babel'>
     function ActiveFriends(props) {
       return (
-        <div>
-          Active Friends
-        </div>
+        <ul>
+          {props.list.map((friend) => (
+            <li key={friend.name}>
+              <span>{friend.name}</span>
+              <button>Remove</button>
+            </li>
+          ))}
+        </ul>
       )
     }
 
     function InactiveFriends(props) {
       return (
-        <div>
-          Inactive Friends
-        </div>
+        <ul>
+          {props.list.map((friend) => (
+            <li key={friend.name}>
+              <span>{friend.name}</span>
+              <button>Remove</button>
+            </li>
+          ))}
+        </ul>
       )
     }
 
