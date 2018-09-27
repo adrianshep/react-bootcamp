@@ -10,6 +10,15 @@
   <div id='app'></div>
 
   <script type='text/babel'>
+  /* order of lifecycle events:
+    1) constructor: because we need to establish initial state for our component
+    2) render: describes UI for that particular component
+    3) componentDidMount: "DidMount" because it's after a render
+    4) componentDidUpdate: this lifecycle hook will be invoked whenever your component updates, meaning the state changes because the component receives new props
+    5) componentWillUnmount: invoked whenever component will be removed from the DOM
+    6) (as of React 16.3) getDerivedStateFromProps: deriving state of your component from the props you are receiving (better ways of doing this, though, so not used much)
+
+  */
     function ActiveFriends (props) {
       return (
         <div>
@@ -65,7 +74,21 @@
         this.updateInput = this.updateInput.bind(this)
         this.handleAddFriend = this.handleAddFriend.bind(this)
         this.handleToggleFriend = this.handleToggleFriend.bind(this)
+
+        console.log('--constructor--')
       }
+      componentDidMount() {
+        console.log('--componentDidMount--')
+      }
+      componentDidUpdate() {
+        console.log('--componentDidUpdate--')
+      }
+      componentWillUnmount() {
+        console.log('--componentWillUnmount--')
+      }
+      // static getDerivedStateFromProps() {
+      //
+      // }
       handleAddFriend() {
         this.setState((currentState) => {
           return {
@@ -103,6 +126,7 @@
         })
       }
       render() {
+        console.log('--render--')
         return (
           <div>
             <input
