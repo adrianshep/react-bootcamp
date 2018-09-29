@@ -9,6 +9,32 @@
 <body>
   <div id='app'></div>
 
+<!-- faking a remote database below and asynchronous data retrieval -->
+  <script>
+    window.API = {
+      fetchFriends() {
+        return new Promise((res, rej) => {
+          const friends = [
+            {
+              name: 'Jordyn',
+              active: true,
+            },
+            {
+              name: 'Mikenzi',
+              active: true,
+            },
+            {
+              name: 'Jake',
+              active: false
+            }
+          ]
+
+          setTimeout(() => res(friends), 2000)
+        })
+      }
+    }
+  </script>
+
   <script type='text/babel'>
   /* order of lifecycle events:
     1) constructor: because we need to establish initial state for our component
@@ -56,20 +82,7 @@
       constructor(props) {
         super(props)
         this.state = {
-          friends: [
-            {
-              name: 'Jordyn',
-              active: true,
-            },
-            {
-              name: 'Mikenzi',
-              active: true,
-            },
-            {
-              name: 'Jake',
-              active: false
-            }
-          ],
+          friends: [],
           input: '',
         }
         this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
@@ -81,6 +94,11 @@
       }
       componentDidMount() {
         console.log('--componentDidMount--')
+
+        API.fetchFriends()
+          .then((friends) => {
+            console.log('FRIENDS', friends)
+          })
       }
       componentDidUpdate() {
         console.log('--componentDidUpdate--')
@@ -88,6 +106,12 @@
       componentWillUnmount() {
         console.log('--componentWillUnmount--')
       }
+
+      // individual components can decide not to rerender based on certain things, but there may be performance issues, so measure that first
+
+      // shouldComponentUpdate(nextProps, nextState) {
+      //  return false
+      // }
       // static getDerivedStateFromProps() {
       //
       // }
