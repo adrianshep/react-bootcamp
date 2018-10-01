@@ -160,6 +160,8 @@
       render() {
         console.log('--render--')
 
+// simple way of implementing conditional rendering below: use if statement with a return statement; when first (LOADING) statement is false, the return statement after it is implemented
+
         if (this.state.loading === true) {
           return <h1>LOADING</h1>
         }
