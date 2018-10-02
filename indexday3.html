@@ -56,6 +56,17 @@
           text: 'Loading'
         }
       }
+      componentDidMount() {
+        const stopper = this.state.text + '...'
+
+        window.setInterval(() => {
+          this.setState((currentState) => {
+            return {
+              text: currentState.text + '.'
+              }
+            })
+          }, 300)
+      }
       render() {
         return <p>{this.state.text}</p>
       }
