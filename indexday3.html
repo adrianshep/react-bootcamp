@@ -136,6 +136,8 @@
           //  console.log('FRIENDS', friends)
           })
       }
+      // when the component isn't going to remount, so we can't use componentDidMount, but we still want to make new updates or AJAX requests then we use:
+
       componentDidUpdate() {
         console.log('--componentDidUpdate--')
       }
