@@ -51,11 +51,29 @@
         )
       }
     }
+
+    function Nav (props) {
+      const languages = ['all', 'javascript', 'ruby', 'python']
+
+      return (
+        <nav>
+          <ul>
+            {languages.map((lang) => (
+              <li key={lang} onClick={() => ({})} >
+                {lang}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
     class App extends React.Component {
       render() {
         return (
           <div>
-          // Day 3 excercise is to build the app that will return programming language accounts
+          // Day 3 excercise is to build the app that will return popular programming language repositories
+            <Nav />
           </div>
         )
       }
