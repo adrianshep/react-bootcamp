@@ -59,7 +59,7 @@
         <nav>
           <ul>
             {languages.map((lang) => (
-              <li key={lang} onClick={() => ({})} >
+              <li key={lang} onClick={() => props.onSelectLanguage(lang)}>
                 {lang}
               </li>
             ))}
@@ -69,11 +69,42 @@
     }
 
     class App extends React.Component {
+      constructor(props) {
+        super(props)
+
+        this.state = {
+          repos: [],
+          activeLanguage: 'all',
+          loading: true,
+        }
+
+        this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
+        this.fetchRepos = this.fetchRepos.bind(this)
+      }
+      fetchRepos(lang) {
+        this.setState({
+          loading: true
+        })
+
+        window.API.fetchPopularRepos(lang)
+          .then((repos) => {
+            this.setState({
+              loading: false,
+              repos,
+            })
+          })
+      }
+      handleSelectLanguage(lang) {
+        this.setState({
+          activeLanguage: lang
+        })
+      }
+      // Day 3 excercise is to build the app that will return popular programming language repositories
       render() {
         return (
           <div>
-          // Day 3 excercise is to build the app that will return popular programming language repositories
-            <Nav />
+            <Nav onSelectLanguage={this.handleSelectLanguage}/>
+            <h1>ACTIVE LANGUAGE: {this.state.activeLanguage}</h1>
           </div>
         )
       }
