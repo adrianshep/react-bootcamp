@@ -81,6 +81,9 @@
         this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
         this.fetchRepos = this.fetchRepos.bind(this)
       }
+      componentDidMount() {
+        this.fetchRepos(this.state.activeLanguage)
+      }
       fetchRepos(lang) {
         this.setState({
           loading: true
@@ -104,7 +107,13 @@
         return (
           <div>
             <Nav onSelectLanguage={this.handleSelectLanguage}/>
-            <h1>ACTIVE LANGUAGE: {this.state.activeLanguage}</h1>
+            {this.state.loading === true
+              ? <Loading />
+              : <div>
+                <h1 style={{textAlign: 'center'}}>
+                  {this.state.activeLanguage}
+                </h1>
+              </div>}
           </div>
         )
       }
