@@ -68,6 +68,22 @@
       )
     }
 
+    function RepoGrid(props) {
+      return (
+        <ul style={{display: 'flex', flexWrap: 'wrap'}}>
+          {props.repos.map(({name, owner, stargazers_count, html_url}) => (
+            <li key={name} style={{margin: 30}}>
+              <ul>
+                <li><a href={html_url}>{name}</a></li>
+                <li>@{owner.login}</li>
+                <li>{stargazers_count}</li>
+              </ul>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
     class App extends React.Component {
       constructor(props) {
         super(props)
@@ -113,7 +129,7 @@
                 <h1 style={{textAlign: 'center'}}>
                   {this.state.activeLanguage}
                 </h1>
-                {JSON.stringify(this.state.repos)}
+                <RepoGrid repos={this.state.repos} />
               </div>}
           </div>
         )
