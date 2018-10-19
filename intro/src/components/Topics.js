@@ -4,11 +4,11 @@ import {
   Route,
 } from 'react-router-dom'
 
-function Topic() {
-  return <h3>TOPIC</h3>
+function Topic({ match }) {
+  return <h3>{match.params.topicId}</h3>
 }
 
-export default function Topic() {
+export default function Topics() {
   return (
     <div>
       <h2>Topics</h2>
@@ -26,9 +26,7 @@ export default function Topic() {
 
         <hr />
 
-        <Route path='/topics/rendering' component={Topic} />
-        <Route path='/topics/components' component={Topic} />
-        <Route path='/topics/props-v-state' component={Topic} />
+        <Route path='/topics/:topicId' component={Topic} />
     </div>
   )
 }
