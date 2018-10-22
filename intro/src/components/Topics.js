@@ -27,10 +27,11 @@ export default function Topics() {
         <hr />
 
         <Route path={`${match.path}/:topicId`} component={Topic} />
-        <Route path={`${match.path}/:topicId`} render={() => {
-          return <Topic name='tyler' />
-        }} />
-        <Route exact path={match.url} render={() => {
+        // passing prop to a component being rendered by react router
+        // <Route path={`${match.path}/:topicId`} render={() => {
+        //  return <Topic name='tyler' />
+        // }} />
+        <Route exact path={match.path} render={() => {
           return <h3>Please select a topic</h3>
         }} />
       </div>
